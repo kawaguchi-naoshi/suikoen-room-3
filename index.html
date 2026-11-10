@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>寸又峡温泉 翠紅苑 ｜ 客室ページ 構成案3（横幅いっぱい写真版）</title>
+<style>
+  :root{
+    --ink:#1C2B2B;
+    --emerald:#2E7D6B;
+    --emerald-deep:#1F5C4E;
+    --cream:#F6F1E7;
+    --paper:#FBF8F1;
+    --sumi:#4A4744;
+    --crimson:#7A2E2E;
+    --line:#D9D2C2;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-padding-top:env(safe-area-inset-top,0px);}
+  body{
+    margin:0;
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",sans-serif;
+    color:var(--sumi);
+    background:var(--paper);
+  }
+  .mincho{font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;}
+
+  /* ===== 構成案メタ情報 ===== */
+  .note-bar{
+    background:var(--ink);color:#fff;
+    padding:10px 16px;font-size:13px;line-height:1.7;
+  }
+  .note-bar strong{color:#9fd6c5;}
+
+  /* ===== サイトヘッダー ===== */
+  header.site{
+    background:var(--paper);border-bottom:1px solid var(--line);
+    position:sticky;top:env(safe-area-inset-top,0px);z-index:50;
+  }
+  .header-inner{
+    max-width:1180px;margin:0 auto;padding:14px 24px;
+    display:flex;align-items:center;justify-content:space-between;gap:24px;
+  }
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand-mark{
+    width:46px;height:46px;border-radius:50%;background:var(--ink);color:#9fd6c5;
+    display:flex;align-items:center;justify-content:center;font-size:11px;
+    letter-spacing:0.05em;flex-shrink:0;
+  }
+  .brand-text .name{font-size:18px;font-weight:700;color:var(--ink);letter-spacing:0.06em;}
+  .brand-text .sub{font-size:11px;color:var(--emerald-deep);letter-spacing:0.08em;}
+  nav.gnav{display:flex;gap:4px;flex-wrap:wrap;}
+  nav.gnav a{
+    color:var(--ink);text-decoration:none;font-size:14px;
+    padding:10px 12px;border-radius:4px;white-space:nowrap;
+  }
+  nav.gnav a:hover{background:rgba(46,125,107,0.1);}
+  nav.gnav a.current{color:var(--emerald-deep);font-weight:700;border-bottom:2px solid var(--emerald);}
+  .header-cta{display:flex;gap:8px;flex-shrink:0;align-items:center;}
+  .btn-reserve{
+    background:var(--crimson);color:#fff;padding:11px 20px;border-radius:3px;
+    font-size:14px;font-weight:700;text-decoration:none;white-space:nowrap;letter-spacing:0.03em;
+  }
+  .btn-lang{
+    display:flex;align-items:center;gap:5px;
+    border:1px solid var(--line);color:var(--ink);background:#fff;
+    padding:10px 14px;border-radius:3px;font-size:13px;text-decoration:none;white-space:nowrap;
+  }
+  .btn-lang:hover{border-color:var(--emerald);}
+  .btn-lang .caret{font-size:9px;opacity:0.6;}
+  @media (max-width:980px){nav.gnav{display:none;}}
+
+  /* ===== パンくず ===== */
+  .breadcrumb{max-width:1180px;margin:0 auto;padding:14px 24px 0;font-size:12px;color:#9a948a;}
+  .breadcrumb a{color:#9a948a;text-decoration:none;}
+  .breadcrumb a:hover{text-decoration:underline;}
+
+  /* ===== バッジ ===== */
+  .tag{
+    display:inline-block;font-size:11px;padding:3px 9px;border-radius:20px;
+    margin-left:8px;vertical-align:middle;letter-spacing:0.02em;
+  }
+  .tag-new{background:#E7F1EC;color:var(--emerald-deep);border:1px solid var(--emerald);}
+  .tag-edit{background:#FBEDE9;color:var(--crimson);border:1px solid var(--crimson);}
+  .tag-keep{background:#EFEDE6;color:#7a7468;border:1px solid #c9c2b3;}
+  .tag-smoke{background:#EFEDE6;color:#5a564c;border:1px solid #c9c2b3;font-weight:700;}
+
+  /* ===== メインビジュアル(動画背景ヒーロー) ===== */
+  .room-hero{
+    position:relative;min-height:400px;display:flex;align-items:center;justify-content:center;
+    color:#fff;text-align:center;overflow:hidden;
+  }
+  .room-hero-bg{
+    position:absolute;inset:0;
+    background:repeating-linear-gradient(120deg,#1f5c4e,#1f5c4e 36px,#2e7d6b 36px,#2e7d6b 72px);
+  }
+  .room-hero-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(12,30,28,0.32) 0%, rgba(12,30,28,0.66) 100%);
+    z-index:1;
+  }
+  .room-hero-video-tag{
+    position:absolute;top:16px;left:16px;z-index:2;
+    display:flex;align-items:center;gap:8px;
+    background:rgba(0,0,0,0.32);color:rgba(255,255,255,0.88);
+    font-size:11px;letter-spacing:0.05em;padding:6px 12px 6px 8px;border-radius:20px;
+  }
+  .room-hero-video-tag .play-icon{
+    width:18px;height:18px;border-radius:50%;border:1px solid rgba(255,255,255,0.75);
+    display:flex;align-items:center;justify-content:center;font-size:8px;flex-shrink:0;
+  }
+  .room-hero-content{position:relative;z-index:2;padding:60px 20px;}
+  .room-hero-content .eyebrow{font-size:12px;letter-spacing:0.2em;opacity:0.88;display:block;margin-bottom:10px;}
+  .room-hero-content h1{font-size:34px;margin:0 0 16px;letter-spacing:0.06em;}
+  .room-hero-content p{font-size:14px;line-height:2;max-width:600px;margin:0 auto;opacity:0.94;}
+  @media (max-width:760px){
+    .room-hero{min-height:360px;}
+    .room-hero-content h1{font-size:28px;}
+  }
+
+  /* ===== セクション共通 ===== */
+  section{padding:56px 24px;}
+  .section-inner{max-width:1180px;margin:0 auto;}
+  .section-head{text-align:center;margin-bottom:36px;}
+  .section-head .eyebrow{
+    font-size:12px;letter-spacing:0.2em;color:var(--emerald-deep);
+    display:block;margin-bottom:8px;
+  }
+  .section-head h2{font-size:26px;margin:0;color:var(--ink);letter-spacing:0.04em;}
+
+  /* ===== コピー／サブコピー／紹介文 ===== */
+  .room-copy{font-size:19px;color:var(--ink);letter-spacing:0.03em;margin:0 0 8px;}
+  .room-subcopy{font-size:13px;color:var(--emerald-deep);letter-spacing:0.04em;margin:0 0 14px;}
+  .room-intro{font-size:13.5px;line-height:1.95;color:var(--sumi);margin:0 0 16px;text-align:left;}
+
+  /* ===== ページ内ジャンプナビ + 定員フィルター ===== */
+  .room-jump{
+    background:#fff;border-bottom:1px solid var(--line);
+    position:sticky;top:calc(75px + env(safe-area-inset-top,0px));z-index:40;
+  }
+  .room-jump-inner{
+    max-width:1180px;margin:0 auto;padding:10px 24px;
+    display:flex;gap:6px;flex-wrap:wrap;justify-content:center;
+  }
+  .room-jump a{
+    font-size:13px;color:var(--sumi);text-decoration:none;
+    padding:8px 16px;border-radius:20px;border:1px solid var(--line);white-space:nowrap;
+  }
+  .room-jump a:hover{background:var(--cream);border-color:var(--emerald);}
+
+  .capacity-filter{
+    background:var(--cream);border-bottom:1px solid var(--line);
+  }
+  .capacity-filter-inner{
+    max-width:1180px;margin:0 auto;padding:10px 24px;
+    display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;
+  }
+  .cf-label{font-size:12px;color:var(--emerald-deep);letter-spacing:0.04em;margin-right:4px;}
+  .cf-btn{
+    font-size:12.5px;color:var(--sumi);background:#fff;border:1px solid var(--line);
+    padding:6px 14px;border-radius:20px;cursor:pointer;white-space:nowrap;
+  }
+  .cf-btn:hover{border-color:var(--emerald);}
+  .cf-btn.is-active{background:var(--emerald-deep);color:#fff;border-color:var(--emerald-deep);}
+  .cf-count{font-size:11.5px;color:#9a948a;margin-left:4px;}
+
+  /* ===== 間取り図チップ・モーダル ===== */
+  .floorplan-chip{
+    position:absolute;right:14px;bottom:14px;z-index:3;
+    display:flex;align-items:center;gap:6px;cursor:pointer;
+    background:rgba(255,255,255,0.94);color:var(--ink);
+    border:1px solid var(--line);border-radius:20px;
+    padding:7px 14px 7px 10px;font-size:11.5px;letter-spacing:0.02em;
+    box-shadow:0 2px 8px rgba(0,0,0,0.14);
+  }
+  .floorplan-chip:hover{border-color:var(--emerald);}
+  .floorplan-chip .fp-icon{font-size:13px;}
+  .floorplan-chip.small{padding:5px 11px 5px 8px;font-size:10.5px;right:10px;bottom:10px;}
+
+  /* ===== 写真ギャラリー(スライド＋サムネイル) ===== */
+  .gallery-main{position:relative;aspect-ratio:16/10;border-radius:4px;overflow:hidden;background:#eee;}
+  .gallery-slide{
+    position:absolute;inset:0;display:none;align-items:center;justify-content:center;
+    background:repeating-linear-gradient(135deg,#e4ded0,#e4ded0 16px,#d9d2c2 16px,#d9d2c2 32px);
+    color:#a39c8c;font-size:12.5px;letter-spacing:0.04em;text-align:center;padding:14px;
+  }
+  .gallery-slide.is-active{display:flex;}
+  .gallery-nav{
+    position:absolute;top:50%;transform:translateY(-50%);z-index:2;
+    background:rgba(255,255,255,0.88);border:none;width:32px;height:32px;border-radius:50%;
+    font-size:15px;line-height:1;cursor:pointer;color:var(--ink);
+  }
+  .gallery-nav:hover{background:#fff;}
+  .gallery-nav.prev{left:10px;}
+  .gallery-nav.next{right:10px;}
+  .gallery-count{
+    position:absolute;top:10px;left:10px;z-index:2;
+    background:rgba(0,0,0,0.45);color:#fff;font-size:10.5px;padding:3px 9px;border-radius:20px;
+  }
+  .gallery-thumbs{display:flex;gap:6px;margin-top:8px;overflow-x:auto;padding-bottom:2px;}
+  .gallery-thumb{
+    flex:0 0 auto;font-size:10.5px;color:var(--sumi);background:var(--cream);
+    border:1px solid var(--line);border-radius:4px;padding:6px 11px;cursor:pointer;white-space:nowrap;
+  }
+  .gallery-thumb.is-active{background:var(--emerald-deep);color:#fff;border-color:var(--emerald-deep);}
+
+  /* ===== 特典ボックス内の写真 ===== */
+  .perk-photo{
+    width:128px;height:128px;flex-shrink:0;border-radius:4px;
+    background:repeating-linear-gradient(135deg,#e4ded0,#e4ded0 10px,#d9d2c2 10px,#d9d2c2 20px);
+    display:flex;align-items:center;justify-content:center;
+    color:#a39c8c;font-size:11px;text-align:center;padding:6px;line-height:1.3;
+  }
+
+  .fp-modal{
+    position:fixed;inset:0;background:rgba(12,20,18,0.72);z-index:200;
+    display:none;align-items:center;justify-content:center;padding:24px;
+  }
+  .fp-modal.is-open{display:flex;}
+  .fp-modal-inner{
+    background:#fff;border-radius:8px;max-width:560px;width:100%;padding:28px;position:relative;
+  }
+  .fp-modal-close{
+    position:absolute;top:12px;right:14px;background:none;border:none;
+    font-size:16px;color:var(--sumi);cursor:pointer;line-height:1;
+  }
+  .fp-modal-title{font-size:15px;color:var(--ink);margin:0 0 12px;padding-right:20px;letter-spacing:0.02em;}
+  .fp-modal-image{
+    aspect-ratio:4/3;background:repeating-linear-gradient(45deg,#eef2ef,#eef2ef 12px,#dfe7e2 12px,#dfe7e2 24px);
+    border-radius:4px;display:flex;align-items:center;justify-content:center;
+    color:#7d8579;font-size:13px;text-align:center;padding:16px;margin-bottom:14px;
+  }
+  .fp-modal-caption{font-size:12.5px;color:var(--sumi);line-height:1.8;}
+
+  /* ===== 和室/洋室 個別タイプ一覧グリッド ===== */
+  .room-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:22px;
+  }
+  .room-card{
+    background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden;
+  }
+  .room-card .room-photo{
+    position:relative;aspect-ratio:16/10;
+    background:repeating-linear-gradient(135deg,#e4ded0,#e4ded0 14px,#d9d2c2 14px,#d9d2c2 28px);
+    display:flex;align-items:center;justify-content:center;
+    color:#a39c8c;font-size:12px;letter-spacing:0.05em;text-align:center;padding:10px;
+  }
+  .room-card-body{padding:18px 20px 20px;}
+  .room-card-body h4{
+    margin:0 0 4px;font-size:15.5px;color:var(--ink);letter-spacing:0.02em;
+    display:flex;align-items:center;flex-wrap:wrap;gap:6px;
+  }
+  .room-card-body .room-meta{font-size:12.5px;color:var(--emerald-deep);margin-bottom:8px;}
+  .room-card-body .room-spec{font-size:12px;line-height:1.8;color:var(--sumi);margin:0;}
+  .room-card-body .room-spec b{color:var(--ink);font-weight:700;}
+  .room-card.is-filtered-out,.room-block.is-filtered-out{display:none;}
+  @media (max-width:760px){.room-grid{grid-template-columns:1fr;}}
+
+  /* ===== アメニティ ===== */
+  .amenity-box{
+    background:#fff;border:1px solid var(--line);border-radius:6px;
+    padding:22px 26px;margin-top:22px;
+  }
+  .amenity-box h5{margin:0 0 10px;font-size:14px;color:var(--emerald-deep);letter-spacing:0.03em;}
+  .amenity-list{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none;}
+  .amenity-list li{
+    font-size:12.5px;color:var(--sumi);background:var(--cream);
+    padding:5px 12px;border-radius:20px;border:1px solid var(--line);
+  }
+
+  /* ===== インターネット予約限定特典 ===== */
+  .perk-box{
+    background:var(--cream);border:1px solid var(--emerald);border-radius:6px;
+    padding:16px 20px;margin:18px 0;display:flex;gap:12px;align-items:flex-start;
+  }
+  .perk-box .perk-icon{font-size:20px;flex-shrink:0;line-height:1.4;}
+  .perk-box .perk-text{font-size:13px;line-height:1.8;color:var(--sumi);}
+  .perk-box .perk-text b{
+    display:block;color:var(--emerald-deep);font-size:12px;letter-spacing:0.03em;margin-bottom:3px;
+  }
+
+  /* ===== 比較表(任意/後日実装候補) ===== */
+  .compare-note{text-align:center;margin-top:28px;}
+  .compare-note a{
+    display:inline-block;font-size:13.5px;color:var(--emerald-deep);
+    text-decoration:none;border-bottom:1px solid var(--emerald);padding-bottom:2px;
+  }
+
+  /* ===== 予約導線(空室検索窓) ===== */
+  .booking-bar{background:var(--ink);padding:22px 24px;}
+  .booking-inner{
+    max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:14px;
+    align-items:center;justify-content:space-between;
+  }
+  .booking-badge{
+    background:var(--emerald);color:#fff;padding:10px 18px;border-radius:3px;
+    font-size:13px;font-weight:700;letter-spacing:0.04em;white-space:nowrap;
+  }
+  .booking-form{display:flex;flex-wrap:wrap;gap:10px;flex:1;}
+  .booking-form .field{
+    background:#fff;border-radius:3px;padding:9px 14px;font-size:13px;
+    color:var(--sumi);min-width:140px;
+  }
+  .booking-form .field .label{font-size:11px;color:#9a948a;display:block;}
+  .btn-search{
+    background:var(--crimson);color:#fff;border:none;padding:12px 26px;
+    border-radius:3px;font-size:14px;font-weight:700;cursor:default;
+  }
+  .booking-links{display:flex;gap:10px;flex-wrap:wrap;width:100%;margin-top:10px;}
+  .booking-links a{
+    flex:1;text-align:center;background:rgba(255,255,255,0.08);color:#fff;
+    border:1px solid rgba(255,255,255,0.25);border-radius:3px;padding:10px 12px;
+    font-size:13px;text-decoration:none;min-width:160px;
+  }
+
+  /* ===== 設計メモ ===== */
+  .design-note{
+    margin-top:18px;background:#fff;border:1px dashed #c9c2b3;border-radius:4px;
+    padding:14px 18px;font-size:12.5px;color:#7a7468;line-height:1.8;
+  }
+  .design-note b{color:var(--emerald-deep);}
+
+  /* ===== フッター ===== */
+  footer.site{background:var(--ink);color:#cdd6d1;padding:56px 24px 28px;}
+  .footer-inner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;}
+  .footer-col h4{color:#fff;font-size:13px;letter-spacing:0.08em;margin:0 0 16px;}
+  .footer-col ul{list-style:none;padding:0;margin:0;}
+  .footer-col li{margin-bottom:9px;}
+  .footer-col a{color:#cdd6d1;text-decoration:none;font-size:13px;}
+  .footer-bottom{
+    max-width:1180px;margin:36px auto 0;padding-top:20px;
+    border-top:1px solid rgba(255,255,255,0.12);font-size:12px;color:#8a948f;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  }
+  @media (max-width:860px){.footer-inner{grid-template-columns:1fr;gap:28px;}}
+
+  /* ===== talkappi風 フローティングチャットボタン ===== */
+  .talkappi-fab{
+    position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:70;
+    display:flex;align-items:center;gap:8px;
+    background:var(--emerald-deep);color:#fff;
+    padding:12px 18px 12px 14px;border-radius:30px;
+    text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,0.25);
+    font-size:12.5px;letter-spacing:0.02em;
+  }
+  .talkappi-fab .icon{
+    width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,0.15);
+    display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;
+  }
+  @media (max-width:600px){
+    .talkappi-fab span.label{display:none;}
+    .talkappi-fab{padding:12px;}
+  }
+
+  /* ===== 構成案3：見出し中央配置（構成案1準拠） ===== */
+  .room-copy-block{max-width:640px;margin:18px auto 0;}
+  .section-head .room-copy{font-size:20px;}
+  .section-head .room-subcopy{margin-bottom:16px;}
+  .room-intro{margin:0;}
+  .section-head h2{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;}
+  .section-head h2 .tag{margin-left:0;}
+
+  /* ===== 構成案3：横幅いっぱいの写真（構成案1の特別室と同じ 16:7） ===== */
+  .gallery .gallery-main{aspect-ratio:16/7;border-radius:0;}
+  .gallery.standalone .gallery-main{border-radius:8px;}
+  .gallery .gallery-slide{font-size:13px;}
+  .room-block .gallery-thumbs{padding:8px 12px 0;margin-top:0;}
+  .gallery.standalone .gallery-thumbs{margin-top:8px;}
+
+  /* 部屋ブロック（写真＋詳細） */
+  .room-block{background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden;}
+  .room-block-body{padding:28px 32px 30px;}
+  .room-block-body h3{
+    margin:0 0 6px;font-size:19px;color:var(--ink);letter-spacing:0.03em;
+    display:flex;align-items:center;flex-wrap:wrap;gap:8px;
+  }
+  .room-block-body h3 .tag{margin-left:0;}
+  .room-block-body .feature-badge{margin-bottom:12px;}
+  .room-desc{font-size:13.5px;line-height:1.9;color:var(--sumi);margin:0 0 18px;}
+  .room-block-body .stat-row{margin-top:12px;}
+  .feature-badge{
+    display:inline-block;background:var(--emerald-deep);color:#fff;
+    font-size:11px;font-weight:700;padding:5px 14px;border-radius:20px;letter-spacing:0.06em;
+  }
+  .stat-row{
+    display:flex;flex-wrap:wrap;gap:10px 28px;margin-bottom:16px;
+    padding-bottom:16px;border-bottom:1px solid var(--line);
+  }
+  .stat-item .stat-label{font-size:11px;color:var(--emerald-deep);letter-spacing:0.04em;display:block;margin-bottom:2px;}
+  .stat-item .stat-value{font-size:14.5px;color:var(--ink);}
+  .spec-line{font-size:12.5px;line-height:1.85;color:var(--sumi);margin:0;}
+  .spec-line b{color:var(--ink);font-weight:700;}
+  @media (max-width:760px){.room-block-body{padding:22px 20px 24px;}}
+
+  /* 和室4タイプ：PCは1行4枚、スマホは2列 */
+  .room-grid.four{grid-template-columns:repeat(4,1fr);gap:16px;}
+  .room-grid.four .room-card-body{padding:14px 16px 16px;}
+  .room-grid.four .room-card-body .room-meta{margin-bottom:0;}
+  @media (max-width:760px){.room-grid.four{grid-template-columns:repeat(2,1fr);gap:12px;}}
+</style>
+</head>
+<body>
+
+<div class="note-bar">
+  このページは「客室ページ」の<strong>構成案3</strong>です。構成案2（ジグザグレイアウト版）の機能（動画ヒーロー・定員絞り込み・写真ギャラリー・間取り図）をベースに、各部屋タイプ名・コピー・説明文・写真の配置は構成案1（見出し中央＋横幅いっぱいの写真）を採用しています。実際のデザイン（フォント・配色・写真・動画）とは異なります。<br>
+  構成案2との違い：①ジグザグをやめ、各部屋タイプの写真を横幅いっぱいに表示（構成案1の特別室と同じサイズ）　②和室4タイプの写真を1行に並べ、設備は全タイプ共通表記に集約　③洋室はツインベッドのみ掲載（シングルベッドは非掲載）<br>
+  バッジの意味：<span class="tag tag-new">新規</span>新規作成 　<span class="tag tag-edit">要調整</span>現行から内容変更・要確認 　<span class="tag tag-keep">継続</span>現行サイトの内容を流用
+</div>
+
+<!-- ===================== ヘッダー ===================== -->
+<header class="site">
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-mark">翠紅苑</div>
+      <div class="brand-text">
+        <div class="name">寸又峡温泉 翠紅苑</div>
+        <div class="sub">SUIKOEN</div>
+      </div>
+    </div>
+    <nav class="gnav">
+      <a href="#">TOP</a>
+      <a href="#">観光</a>
+      <a href="#">過ごし方</a>
+      <a href="#">料理</a>
+      <a href="#">温泉</a>
+      <a href="#" class="current">客室</a>
+      <a href="#">日帰りランチ・入浴</a>
+      <a href="#">アクセス</a>
+    </nav>
+    <div class="header-cta">
+      <a class="btn-reserve" href="#cta">空室／予約</a>
+      <a class="btn-lang" href="#">🌐 日本語<span class="caret">▾</span></a>
+    </div>
+  </div>
+</header>
+
+<div class="breadcrumb"><a href="#">TOP</a> &gt; 客室</div>
+
+<!-- ===================== メインビジュアル(動画背景) ===================== -->
+<div class="room-hero">
+  <div class="room-hero-bg"></div>
+  <div class="room-hero-overlay"></div>
+  <div class="room-hero-video-tag"><span class="play-icon">▶</span>動画：客室・館内のディテール(10秒ループ)</div>
+  <div class="room-hero-content">
+    <span class="eyebrow">ROOM</span>
+    <h1 class="mincho">客室</h1>
+    <p>渓谷を望む特別室から、ご家族でくつろげる和室、旅の荷を解く洋室まで。<br>旅のスタイルと人数に合わせて、翠紅苑での過ごし方をお選びください。</p>
+  </div>
+</div>
+<div class="design-note" style="max-width:1180px;margin:18px auto 0;">
+  <b>設計メモ(メインビジュアル)：</b>構成案2と同じく短尺の無音ループ動画（トップページMVの①背景ループを再利用する想定）。トップページのMVとの統一感についてはクライアント確認をお願いします。
+</div>
+
+<!-- ===================== ページ内ジャンプナビ ===================== -->
+<div class="room-jump">
+  <div class="room-jump-inner">
+    <a href="#special">特別室（家族風呂付き）</a>
+    <a href="#washitsu">和室</a>
+    <a href="#yoshitsu">洋室</a>
+  </div>
+</div>
+
+<!-- ===================== 定員かんたん絞り込み ===================== -->
+<div class="capacity-filter">
+  <div class="capacity-filter-inner">
+    <span class="cf-label">定員でさがす<span class="tag tag-new">新規</span></span>
+    <button class="cf-btn is-active" data-capacity="all">すべて</button>
+    <button class="cf-btn" data-capacity="2">〜2名</button>
+    <button class="cf-btn" data-capacity="4">〜4名</button>
+    <button class="cf-btn" data-capacity="6">〜6名</button>
+    <span class="cf-count" id="cfCount"></span>
+  </div>
+</div>
+
+<!-- ===================== 特別室 ===================== -->
+<section id="special" style="background:var(--paper);">
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="eyebrow">SPECIAL ROOM</span>
+      <h2 class="mincho">特別室（家族風呂付き）<span class="tag tag-smoke">禁煙</span><span class="tag tag-keep">継続</span></h2>
+      <div class="room-copy-block">
+        <p class="room-copy mincho">渓谷を、ひとり占めする夜。<span class="tag tag-new">新規</span></p>
+        <p class="room-subcopy">当館で一室限定、源泉かけ流しの家族風呂付き</p>
+        <p class="room-intro">客室に一歩足を踏み入れれば、そこはもう温泉。エメラルドグリーンの渓谷を望む貸切風呂を家族水入らずで独り占めし、誰にも邪魔されない静けさの中で、特別な一夜をお過ごしいただけます。記念日や特別な旅にふさわしい、翠紅苑最上級のお部屋です。</p>
+      </div>
+    </div>
+
+    <div class="room-block">
+      <div class="gallery">
+        <div class="gallery-main" id="gallery-special">
+          <div class="gallery-slide is-active">[ 写真：居間（横幅いっぱいの大きな写真） ]</div>
+          <div class="gallery-slide">[ 写真：家族風呂 ]</div>
+          <div class="gallery-slide">[ 写真：ベッド ]</div>
+          <div class="gallery-slide">[ 写真：アメニティルーム ]</div>
+          <div class="gallery-slide">[ 写真：庭 ]</div>
+          <div class="gallery-slide">[ 写真：洗面所 ]</div>
+          <div class="gallery-slide">[ 写真：トイレ ]</div>
+          <div class="gallery-slide">[ 写真：アメニティ ]</div>
+          <div class="gallery-slide">[ 写真：その他 ]</div>
+          <span class="gallery-count" id="gallery-special-count">1 / 9</span>
+          <button class="gallery-nav prev" onclick="galleryNav('gallery-special',-1)">‹</button>
+          <button class="gallery-nav next" onclick="galleryNav('gallery-special',1)">›</button>
+          <div class="floorplan-chip" onclick="openFloorplan('特別室（家族風呂付き）','和洋室85㎡・家族風呂（源泉かけ流し）付き。実測の間取り図は撮影・採寸後に差し替え予定です。')"><span class="fp-icon">▦</span>間取り図</div>
+        </div>
+        <div class="gallery-thumbs">
+          <div class="gallery-thumb is-active" onclick="gallerySet('gallery-special',0)">居間</div>
+          <div class="gallery-thumb" onclick="gallerySet('gallery-special',1)">家族風呂</div>
+          <div class="gallery-thumb" onclick="gallerySet('gallery-special',2)">ベッド</div>
+          <div class="gallery-thumb" onclick="gallerySet('gallery-special',3)">アメニティルーム</div>
+          <div class="gallery-thumb" onclick="gallerySet('gallery-special',4)">庭</div>
+          <div class="gallery-thumb" onclick="gallerySet('gallery-special',5)">洗面所</div>
+          <div class="gallery-thumb" onclick="gallerySet('gallery-special',6)">トイレ</div>
+          <div class="gallery-thumb" onclick="gallerySet('gallery-special',7)">アメニティ</div>
+          <div class="gallery-thumb" onclick="gallerySet('gallery-special',8)">その他</div>
+        </div>
+      </div>
+      <div class="room-block-body">
+        <span class="feature-badge">当館一室限定</span>
+        <h3 class="mincho">特別室（家族風呂付き）<span class="tag tag-smoke">禁煙</span></h3>
+        <p class="room-desc">和室10畳＋セミダブルベッド２台を完備した、フローリングの和洋室。</p>
+        <div class="stat-row">
+          <div class="stat-item"><span class="stat-label">眺望</span><span class="stat-value">1階（裏庭に面します）</span></div>
+          <div class="stat-item"><span class="stat-label">広さ</span><span class="stat-value">和洋室 85㎡</span></div>
+          <div class="stat-item"><span class="stat-label">ご利用人数</span><span class="stat-value">4名様まで</span></div>
+        </div>
+        <p class="spec-line"><b>設備：</b>オープンバス（源泉かけ流し）、洗面台、トイレ（ウォシュレット）、冷蔵庫、液晶テレビ（地デジ対応）、衛星放送、電話、湯沸かしポット、ドライヤー</p>
+      </div>
+    </div>
+
+    <div class="amenity-box">
+      <h5>特別室のアメニティ</h5>
+      <ul class="amenity-list">
+        <li>浴衣</li><li>丹前</li><li>バスタオル</li><li>温泉タオル</li><li>タオル</li>
+        <li>歯ブラシ</li><li>綿棒</li><li>ハミガキセット</li><li>ヘアブラシ</li><li>くし</li>
+        <li>カミソリ</li><li>シャワーキャップ</li><li>石鹸（液体）</li><li>ボディーソープ</li>
+        <li>シャンプー</li><li>コンディショナー</li><li>たび（冬期）</li>
+      </ul>
+    </div>
+
+    <div class="design-note">
+      <b>設計メモ：</b>見出し・コピー・説明文は構成案1と同じく中央配置。写真は構成案1の特別室と同じ「横幅いっぱい・16:7」のサイズで、構成案2の9枚ギャラリー（矢印／サムネイルで切替）と間取り図チップをそのまま載せています。
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 和室 ===================== -->
+<section id="washitsu" style="background:var(--cream);">
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="eyebrow">JAPANESE STYLE ROOM</span>
+      <h2 class="mincho">和室<span class="tag tag-smoke">禁煙</span><span class="tag tag-keep">継続</span></h2>
+      <div class="room-copy-block">
+        <p class="room-copy mincho">山里の畳に、身をゆだねる。<span class="tag tag-new">新規</span></p>
+        <p class="room-subcopy">8畳から14畳まで、人数に合わせて選べる4つの広さ</p>
+        <p class="room-intro">ご夫婦水入らずの旅から、三世代でのご家族旅行まで。8畳から14畳まで4つの広さをご用意し、大切な方との時間に合わせたお部屋選びができます。畳の香りに包まれ、山里のもてなしをゆっくりとお楽しみください。</p>
+      </div>
+    </div>
+
+    <div class="gallery standalone">
+      <div class="gallery-main" id="gallery-washitsu">
+        <div class="gallery-slide is-active">[ 写真：和室 居間（横幅いっぱいの大きな写真） ]</div>
+        <div class="gallery-slide">[ 写真：浴室 ]</div>
+        <div class="gallery-slide">[ 写真：洗面所 ]</div>
+        <div class="gallery-slide">[ 写真：トイレ ]</div>
+        <div class="gallery-slide">[ 写真：眺望（例） ]</div>
+        <div class="gallery-slide">[ 写真：アメニティ ]</div>
+        <div class="gallery-slide">[ 写真：その他 ]</div>
+        <span class="gallery-count" id="gallery-washitsu-count">1 / 7</span>
+        <button class="gallery-nav prev" onclick="galleryNav('gallery-washitsu',-1)">‹</button>
+        <button class="gallery-nav next" onclick="galleryNav('gallery-washitsu',1)">›</button>
+      </div>
+      <div class="gallery-thumbs">
+        <div class="gallery-thumb is-active" onclick="gallerySet('gallery-washitsu',0)">居間</div>
+        <div class="gallery-thumb" onclick="gallerySet('gallery-washitsu',1)">浴室</div>
+        <div class="gallery-thumb" onclick="gallerySet('gallery-washitsu',2)">洗面所</div>
+        <div class="gallery-thumb" onclick="gallerySet('gallery-washitsu',3)">トイレ</div>
+        <div class="gallery-thumb" onclick="gallerySet('gallery-washitsu',4)">眺望（例）</div>
+        <div class="gallery-thumb" onclick="gallerySet('gallery-washitsu',5)">アメニティ</div>
+        <div class="gallery-thumb" onclick="gallerySet('gallery-washitsu',6)">その他</div>
+      </div>
+    </div>
+
+    <div class="room-grid four">
+      <div class="room-card" data-capacity="6">
+        <div class="room-photo">
+          [ 写真：和室 14畳 ]
+          <div class="floorplan-chip small" onclick="openFloorplan('和室 14畳','定員6名様。実測の間取り図は撮影・採寸後に差し替え予定です。')"><span class="fp-icon">▦</span>間取り図</div>
+        </div>
+        <div class="room-card-body">
+          <h4>和室 14畳<span class="tag tag-smoke">禁煙</span></h4>
+          <div class="room-meta">定員6名様</div>
+        </div>
+      </div>
+      <div class="room-card" data-capacity="6">
+        <div class="room-photo">
+          [ 写真：和室 12畳 ]
+          <div class="floorplan-chip small" onclick="openFloorplan('和室 12畳','定員6名様。実測の間取り図は撮影・採寸後に差し替え予定です。')"><span class="fp-icon">▦</span>間取り図</div>
+        </div>
+        <div class="room-card-body">
+          <h4>和室 12畳<span class="tag tag-smoke">禁煙</span></h4>
+          <div class="room-meta">定員6名様</div>
+        </div>
+      </div>
+      <div class="room-card" data-capacity="5">
+        <div class="room-photo">
+          [ 写真：和室 10畳 ]
+          <div class="floorplan-chip small" onclick="openFloorplan('和室 10畳','定員5名様。実測の間取り図は撮影・採寸後に差し替え予定です。')"><span class="fp-icon">▦</span>間取り図</div>
+        </div>
+        <div class="room-card-body">
+          <h4>和室 10畳<span class="tag tag-smoke">禁煙</span></h4>
+          <div class="room-meta">定員5名様</div>
+        </div>
+      </div>
+      <div class="room-card" data-capacity="4">
+        <div class="room-photo">
+          [ 写真：和室 8畳 ]
+          <div class="floorplan-chip small" onclick="openFloorplan('和室 8畳','定員4名様。実測の間取り図は撮影・採寸後に差し替え予定です。')"><span class="fp-icon">▦</span>間取り図</div>
+        </div>
+        <div class="room-card-body">
+          <h4>和室 8畳<span class="tag tag-smoke">禁煙</span></h4>
+          <div class="room-meta">定員4名様</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="amenity-box">
+      <h5>和室の設備（全タイプ共通）</h5>
+      <p class="spec-line">浴室、洗面台、トイレ（ウォシュレット）、冷蔵庫、液晶テレビ（地デジ対応）、衛星放送、電話、湯沸かしポット、ドライヤー</p>
+    </div>
+
+    <div class="amenity-box">
+      <h5>和室のアメニティ（全タイプ共通）</h5>
+      <ul class="amenity-list">
+        <li>浴衣</li><li>丹前</li><li>バスタオル</li><li>温泉タオル</li><li>タオル</li>
+        <li>歯ブラシ</li><li>綿棒</li><li>ハミガキセット</li><li>ヘアブラシ</li><li>くし</li>
+        <li>カミソリ</li><li>シャワーキャップ</li><li>石鹸（液体）</li><li>ボディーソープ</li>
+        <li>シャンプー</li><li>コンディショナー</li><li>たび（冬期）</li>
+      </ul>
+    </div>
+
+    <div class="design-note">
+      <b>設計メモ：</b>代表写真（7枚ギャラリー）を特別室と同じ横幅いっぱい・16:7で表示。14畳・12畳・10畳・8畳の4枚はPCでは1行に並べ、スマホ（760px以下）では2列×2行に折り返します。各カードには広さ・定員と間取り図チップのみを残し、4タイプで同一だった設備は「全タイプ共通」として1か所にまとめました。定員データは「定員でさがす」と連動します。
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 洋室 ===================== -->
+<section id="yoshitsu" style="background:var(--paper);">
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="eyebrow">WESTERN STYLE ROOM</span>
+      <h2 class="mincho">洋室<span class="tag tag-smoke">禁煙</span><span class="tag tag-keep">継続</span></h2>
+      <div class="room-copy-block">
+        <p class="room-copy mincho">ベッドで迎える、静かな夜。<span class="tag tag-new">新規</span></p>
+        <p class="room-subcopy">旅の荷を解いて、ゆったりとおくつろぎのひととき</p>
+        <p class="room-intro">布団の上げ下げを気にせず、着いてすぐにベッドでくつろげるツインベッドの洋室。観光で歩き疲れた体を、静かな夜にゆっくりと休めてください。<span class="tag tag-edit">要調整</span></p>
+      </div>
+    </div>
+
+    <div class="room-block" data-capacity="2">
+      <div class="gallery">
+        <div class="gallery-main" id="gallery-yoshitsu">
+          <div class="gallery-slide is-active">[ 写真：洋室 ツインベッド（横幅いっぱいの大きな写真） ]</div>
+          <div class="gallery-slide">[ 写真：浴室 ]</div>
+          <div class="gallery-slide">[ 写真：洗面所 ]</div>
+          <div class="gallery-slide">[ 写真：トイレ ]</div>
+          <div class="gallery-slide">[ 写真：アメニティ ]</div>
+          <span class="gallery-count" id="gallery-yoshitsu-count">1 / 5</span>
+          <button class="gallery-nav prev" onclick="galleryNav('gallery-yoshitsu',-1)">‹</button>
+          <button class="gallery-nav next" onclick="galleryNav('gallery-yoshitsu',1)">›</button>
+          <div class="floorplan-chip" onclick="openFloorplan('洋室 ツインベッド','14.0㎡／定員2名様まで。実測の間取り図は撮影・採寸後に差し替え予定です。')"><span class="fp-icon">▦</span>間取り図</div>
+        </div>
+        <div class="gallery-thumbs">
+          <div class="gallery-thumb is-active" onclick="gallerySet('gallery-yoshitsu',0)">居間</div>
+          <div class="gallery-thumb" onclick="gallerySet('gallery-yoshitsu',1)">浴室</div>
+          <div class="gallery-thumb" onclick="gallerySet('gallery-yoshitsu',2)">洗面所</div>
+          <div class="gallery-thumb" onclick="gallerySet('gallery-yoshitsu',3)">トイレ</div>
+          <div class="gallery-thumb" onclick="gallerySet('gallery-yoshitsu',4)">アメニティ</div>
+        </div>
+      </div>
+      <div class="room-block-body">
+        <h3 class="mincho">洋室 ツインベッド<span class="tag tag-smoke">禁煙</span></h3>
+        <div class="stat-row">
+          <div class="stat-item"><span class="stat-label">広さ</span><span class="stat-value">14.0㎡</span></div>
+          <div class="stat-item"><span class="stat-label">ご利用人数</span><span class="stat-value">2名様まで</span></div>
+        </div>
+        <p class="spec-line"><b>設備：</b>浴室、洗面台、トイレ（ウォシュレット）、冷蔵庫、液晶テレビ（地デジ対応）、衛星放送、電話、湯沸かしポット、ドライヤー</p>
+      </div>
+    </div>
+
+    <div class="amenity-box">
+      <h5>洋室のアメニティ</h5>
+      <ul class="amenity-list">
+        <li>浴衣</li><li>丹前</li><li>バスタオル</li><li>温泉タオル</li><li>タオル</li>
+        <li>歯ブラシ</li><li>綿棒</li><li>ハミガキセット</li><li>ヘアブラシ</li><li>くし</li>
+        <li>カミソリ</li><li>シャワーキャップ</li><li>石鹸（液体）</li><li>ボディーソープ</li>
+        <li>シャンプー</li><li>コンディショナー</li><li>たび（冬期）</li>
+      </ul>
+    </div>
+
+    <div class="design-note">
+      <b>設計メモ：</b>シングルベッドは掲載せず、ツインベッドのみの1タイプ構成に変更。1タイプのため、特別室と同じ「横幅いっぱいの写真＋詳細」のブロックで掲載しています。紹介文の「ツインベッド・シングルベッドの2タイプから〜」はシングル非掲載に合わせて書き換えたため<span class="tag tag-edit">要調整</span>としています。
+    </div>
+  </div>
+</section>
+
+<!-- ===================== インターネット予約限定特典(全客室共通) ===================== -->
+<div style="background:var(--paper);padding:0 24px 48px;">
+  <div class="perk-box" style="max-width:1180px;margin:0 auto;">
+    <div class="perk-photo">[ 写真：茶香炉 ]</div>
+    <span class="perk-text"><b>インターネット予約限定特典</b>公式サイトからのご予約に限り、客室に「茶香炉」をご用意いたします（全客室共通）。</span>
+  </div>
+</div>
+
+<!-- ===================== 予約導線(空室検索窓) ===================== -->
+<div class="booking-bar" id="cta">
+  <div class="booking-inner">
+    <div class="booking-badge">ベストレート保証｜公式サイトが一番お得です</div>
+    <div class="booking-form">
+      <div class="field"><span class="label">宿泊日</span>2026/04/01</div>
+      <div class="field"><span class="label">人数</span>2名様</div>
+      <button class="btn-search">空室検索</button>
+    </div>
+    <div class="booking-links">
+      <a href="#">宿泊プラン一覧</a>
+      <a href="#">空室カレンダー</a>
+      <a href="#">予約確認・キャンセル</a>
+    </div>
+  </div>
+</div>
+<div class="compare-note">
+  <a href="#">全客室の広さ・定員を一覧で比較する &gt;（将来的な比較表ページの実装候補）</a>
+</div>
+<div style="height:56px;"></div>
+
+<!-- ===================== フッター ===================== -->
+<footer class="site">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <h4 class="mincho">寸又峡温泉 翠紅苑</h4>
+      <p style="font-size:13px;line-height:1.9;color:#aab5af;">
+        〒428-0405<br>
+        静岡県榛原郡川根本町千頭279<br>
+        TEL：<span style="font-size:1.1em;font-weight:700;color:#fff;">0547-59-3100</span><br>
+        E-mail：mail@suikoen.jp
+      </p>
+    </div>
+    <div class="footer-col">
+      <h4>サイトメニュー</h4>
+      <ul>
+        <li><a href="#">観光</a></li>
+        <li><a href="#">過ごし方</a></li>
+        <li><a href="#">料理</a></li>
+        <li><a href="#">温泉</a></li>
+        <li><a href="#">客室</a></li>
+        <li><a href="#">日帰りランチ・入浴</a></li>
+        <li><a href="#">アクセス</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>その他</h4>
+      <ul>
+        <li><a href="#">よくある質問</a></li>
+        <li><a href="#">お知らせ</a></li>
+        <li><a href="#">宿泊規約</a></li>
+        <li><a href="#">プライバシーポリシー</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>Copyright (C) Okuoi Kanko Hotel SUIKOEN Inc.</div>
+    <div>WordPress + SWELL</div>
+  </div>
+</footer>
+
+<!-- ===================== talkappi風 フローティングチャットボタン ===================== -->
+<a class="talkappi-fab" href="#">
+  <span class="icon">💬</span>
+  <span class="label">AIチャットで質問</span>
+</a>
+
+<!-- ===================== 間取り図モーダル ===================== -->
+<div class="fp-modal" id="fpModal">
+  <div class="fp-modal-inner">
+    <button class="fp-modal-close" onclick="closeFloorplan()">✕</button>
+    <p class="fp-modal-title" id="fpModalTitle"></p>
+    <div class="fp-modal-image" id="fpModalImage">[ 間取り図 ]</div>
+    <p class="fp-modal-caption" id="fpModalCaption"></p>
+  </div>
+</div>
+
+<script>
+  function gallerySet(containerId, idx){
+    var container = document.getElementById(containerId);
+    var wrap = container.closest('.gallery');
+    var slides = container.querySelectorAll('.gallery-slide');
+    var thumbs = wrap.querySelectorAll('.gallery-thumb');
+    slides.forEach(function(s,i){ s.classList.toggle('is-active', i === idx); });
+    thumbs.forEach(function(t,i){ t.classList.toggle('is-active', i === idx); });
+    var counter = document.getElementById(containerId + '-count');
+    if(counter){ counter.textContent = (idx + 1) + ' / ' + slides.length; }
+  }
+  function galleryNav(containerId, delta){
+    var container = document.getElementById(containerId);
+    var slides = container.querySelectorAll('.gallery-slide');
+    var current = 0;
+    slides.forEach(function(s,i){ if(s.classList.contains('is-active')) current = i; });
+    gallerySet(containerId, (current + delta + slides.length) % slides.length);
+  }
+
+  function openFloorplan(name, caption){
+    document.getElementById('fpModalTitle').textContent = name + ' の間取り図';
+    document.getElementById('fpModalImage').textContent = '[ 間取り図：' + name + ' ]';
+    document.getElementById('fpModalCaption').textContent = caption;
+    document.getElementById('fpModal').classList.add('is-open');
+  }
+  function closeFloorplan(){
+    document.getElementById('fpModal').classList.remove('is-open');
+  }
+  document.getElementById('fpModal').addEventListener('click', function(e){
+    if(e.target === this){ closeFloorplan(); }
+  });
+
+  (function(){
+    var buttons = document.querySelectorAll('.cf-btn');
+    var items = document.querySelectorAll('.room-card[data-capacity], .room-block[data-capacity]');
+    function updateCount(){
+      var visible = 0;
+      items.forEach(function(c){ if(!c.classList.contains('is-filtered-out')) visible++; });
+      document.getElementById('cfCount').textContent = visible + '件表示中';
+    }
+    buttons.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        buttons.forEach(function(b){ b.classList.remove('is-active'); });
+        btn.classList.add('is-active');
+        var cap = btn.getAttribute('data-capacity');
+        items.forEach(function(item){
+          var show = cap === 'all' || parseInt(item.getAttribute('data-capacity'),10) <= parseInt(cap,10);
+          item.classList.toggle('is-filtered-out', !show);
+        });
+        updateCount();
+      });
+    });
+    updateCount();
+  })();
+</script>
+
+</body>
+</html>
